@@ -1,0 +1,27 @@
+module tb_Nbit_Adder;
+    parameter N = 4;
+    reg [N-1:0] A, B;
+    reg Cin;
+    wire [N-1:0] Sum;
+    wire Cout;
+
+    Nbit_Adder_MUX #(N) uut (
+        .A(A),
+        .B(B),
+        .Cin(Cin),
+        .Sum(Sum),
+        .Cout(Cout)
+    );
+
+    initial begin
+        $monitor("A = %b, B = %b, Cin = %b => Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+        
+        // Test cases
+        A = 4'b0011; B = 4'b0101; Cin = 0; #10;
+        A = 4'b1100; B = 4'b1010; Cin = 1; #10;
+        A = 4'b1111; B = 4'b0001; Cin = 0; #10;
+        A = 4'b0000; B = 4'b0000; Cin = 1; #10;
+        
+        $stop;
+    end
+endmodule
